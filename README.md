@@ -9,7 +9,9 @@ A five-page analytics solution built around a **fully synthetic** smartphone sal
 > [!IMPORTANT]
 > **Synthetic dataset / independent portfolio project.** All commercial figures, dealers, warehouses, transactions, returns, inventory balances, and targets in this repository are simulated for learning and demonstration. **They are not actual itel Pakistan results or market statistics.** This project is not sponsored, endorsed by, or affiliated with itel. The brand/product names are used for illustrative portfolio context. No real customer records are used.
 
-![Five-page dashboard portfolio overview](assets/portfolio_showcase.png)
+## Five-page dashboard portfolio overview
+
+<img width="724" height="2172" alt="Five-page dashboard portfolio overview" src="https://github.com/user-attachments/assets/7ff997f9-ac41-4750-9837-d41270cdcf7e" />
 
 > **About the gallery:** The five individual images below are **itel-inspired branded design previews**, reconstructed from the working Power BI report, **not direct exports of a live `.pbix` report**. They communicate the report layout, key metrics, and visualization choices; for auditable interactive results, use the Power BI model and source data. If you add your actual final `.pbix` file, place it at `powerbi/itel_Pakistan_Analytics.pbix` (this file is not included in the starter ZIP).
 
