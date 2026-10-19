@@ -1,6 +1,8 @@
 # itel Pakistan | Sales & Operations Analytics
 
-**End-to-End Data Analytics Portfolio Project — Excel → Microsoft SQL Server → Power BI**
+**End-to-End Data Analytics Portfolio Project | Excel • SQL Server • Power BI**
+
+[View the GitHub repository](https://github.com/khurraminsights/itel-Pakistan-Analytics) · [Dashboard gallery](#dashboard-gallery) · [SQL files](#sql-transformation-and-validation) · [Power BI model & DAX](#dax-and-metric-definitions)
 
 A five-page analytics solution built around a **fully synthetic** smartphone sales and distribution dataset. This case study demonstrates relational data preparation, SQL-based quality controls, dimensional modeling, DAX, dashboard development, and the translation of business questions into actionable reporting.
 
@@ -9,11 +11,9 @@ A five-page analytics solution built around a **fully synthetic** smartphone sal
 > [!IMPORTANT]
 > **Synthetic dataset / independent portfolio project.** All commercial figures, dealers, warehouses, transactions, returns, inventory balances, and targets in this repository are simulated for learning and demonstration. **They are not actual itel Pakistan results or market statistics.** This project is not sponsored, endorsed by, or affiliated with itel. The brand/product names are used for illustrative portfolio context. No real customer records are used.
 
-## Five-page dashboard portfolio overview
+[![Five-page itel Pakistan analytics portfolio showcase](portfolio_showcase.png)](portfolio_showcase.png)
 
-<img width="724" height="2172" alt="Five-page dashboard portfolio overview" src="https://github.com/user-attachments/assets/7ff997f9-ac41-4750-9837-d41270cdcf7e" />
-
-> **About the gallery:** The five individual images below are **itel-inspired branded design previews**, reconstructed from the working Power BI report, **not direct exports of a live `.pbix` report**. They communicate the report layout, key metrics, and visualization choices; for auditable interactive results, use the Power BI model and source data. If you add your actual final `.pbix` file, place it at `powerbi/itel_Pakistan_Analytics.pbix` (this file is not included in the starter ZIP).
+> **About the gallery:** The five individual images below are **itel-inspired branded design previews**, reconstructed from the working Power BI report, **not direct exports of a live `.pbix` report**. They communicate the report layout, key metrics, and visualization choices; for auditable interactive results, use the Power BI model and source data. The final interactive `.pbix` file is **not currently uploaded**. Add it to the repository (e.g., `itel_Pakistan_Analytics.pbix`) to make the live report model reproducible.
 
 ## Contents
 
@@ -43,40 +43,37 @@ The simulated business needs a single reporting layer to answer five management 
 
 ### 01 — Executive Overview
 
-<img width="3112" height="1750" alt="Executive Overview dashboard" src="https://github.com/user-attachments/assets/bbfbe39b-8aca-434a-93f8-77bbab8a2084" />
-
+[![Executive Overview dashboard](01_executive_overview.png)](01_executive_overview.png)
 
 **Purpose:** Business-level KPIs with monthly sales trend, top sales regions/models, and a comparison of actual net sales with synthetic targets. Featured indicators include **12,000** sales lines, **75,825** units, **PKR 2.018B** net sales (after discount), **1.09%** unit return rate, and **PKR 1.996B** revenue after refunds.
 
 ### 02 — Sales Performance
 
-<img width="1672" height="941" alt="Sales Performance dashboard" src="https://github.com/user-attachments/assets/9f707937-3669-456b-ad1f-4ab20527a9c1" />
-
+[![Sales Performance dashboard](02_sales_performance.png)](02_sales_performance.png)
 
 **Purpose:** Analyze monthly **gross vs. net sales**, the combined **revenue and units trend**, revenue by product series, and the top 10 dealers. Includes average order value and effective discount-rate KPIs.
 
 ### 03 — Product & Regional Analysis
 
-<img width="1672" height="941" alt="Product and Regional Analysis dashboard" src="https://github.com/user-attachments/assets/f31d61a9-3b48-4760-a031-0f56cda49496" />
+[![Product and Regional Analysis dashboard](03_product_regional_analysis.png)](03_product_regional_analysis.png)
 
 **Purpose:** Compare **all seven geographic regions**, top 10 models ranked by revenue, the revenue-share donut for product series, and the series mix within each region.
 
 ### 04 — Returns Analysis
 
-<img width="1672" height="941" alt="Returns Analysis dashboard" src="https://github.com/user-attachments/assets/2505ca4f-3509-4bc0-9ec4-8224cc5c1043" />
-
+[![Returns Analysis dashboard](04_returns_analysis.png)](04_returns_analysis.png)
 
 **Purpose:** Investigate returned-unit trends, returns by region, reasons for returns, and models with the most returned units. The product ranking includes a tie at the cutoff; **11 models may appear in a Top 10 filter** when ranks tie.
 
 ### 05 — Inventory Analysis
 
-<img width="1448" height="1086" alt="Inventory Analysis dashboard" src="https://github.com/user-attachments/assets/b16b8d06-1009-4f27-ae25-f5d3c3ff9d68" />
+[![Inventory Analysis dashboard](05_inventory_analysis.png)](05_inventory_analysis.png)
 
 **Purpose:** Monitor latest month-end stock by warehouse and series, identify individual low-stock models and unit shortages, and track **historical month-end closing stock** without adding stock from multiple months.
 
 ## Business results & insights
 
-The following values were reconciled against the supplied synthetic CSVs and SQL/Power BI analysis. They should be described as **results of the simulation**, not genuine corporate performance.
+The following values were reconciled during the synthetic SQL/Power BI workflow. Figures displayed with `M`/`B` in dashboard mockups are abbreviated or rounded; SQL/Power BI source metrics are the reference for precision. They should be described as **results of the simulation**, not genuine corporate performance.
 
 | Metric | Result | Meaning |
 |---|---:|---|
@@ -150,7 +147,7 @@ flowchart LR
     Warehouse --> Inventory
 ```
 
-**Relationship counts:** 5 → Sales; 5 → Returns; 4 → Inventory; 2 → Targets. See [`powerbi/relationships_16_active_single.csv`](powerbi/relationships_16_active_single.csv) for all sixteen exact key pairs.
+**Relationship counts:** 5 → Sales; 5 → Returns; 4 → Inventory; 2 → Targets. See [`relationships_16_active_single.csv`](relationships_16_active_single.csv) for all sixteen exact key pairs.
 
 **Date handling:** `DimDate_Stage[Date]` is the marked date column. It connects to Sales[OrderDate], Returns[ReturnDate], Inventory[SnapshotDate], and Targets[MonthStart]. Target data is *monthly*, so monthly comparisons should use `YearMonth` (not interpret the target as a daily amount).
 
@@ -169,11 +166,11 @@ The workflow loaded nine CSV sources into SQL Server, corrected source typing an
 - **147** region-month targets form a complete **7 × 21** grid.
 - `DimDate_Stage[MonthStart]` was fixed in the working staging model to the first day of the associated month; the corrected date dimension was revalidated before date-table marking.
 
-Files: [`sql/01_create_and_load_stage_tables.sql`](sql/01_create_and_load_stage_tables.sql), [`sql/02_validate_stage_tables.sql`](sql/02_validate_stage_tables.sql).
+Files: [`01_create_and_load_stage_tables.sql`](01_create_and_load_stage_tables.sql), [`02_validate_stage_tables.sql`](02_validate_stage_tables.sql).
 
 ## DAX and metric definitions
 
-Actual measures used in the five-page report are documented in [`powerbi/dax_measures.dax`](powerbi/dax_measures.dax) (enter them **one at a time** using **Modeling → New measure**).
+Actual measures used in the five-page report are documented in [`dax_measures.dax`](dax_measures.dax) (enter them **one at a time** using **Modeling → New measure**).
 
 **Sales and return logic:**
 
@@ -201,16 +198,16 @@ Net Revenue After Returns PKR = [Net Sales PKR] - [Total Refund PKR]
 
 - Windows with **Power BI Desktop** (Import mode)
 - **SQL Server 2019+** and SQL Server Management Studio (SSMS), or another suitable SQL Server import method
-- Nine included synthetic `.csv` files in [`data/`](data/)
+- Nine included synthetic `.csv` files in [``]()
 - SQL Server account/service access to the CSV import folder
 
 ### A. Load the SQL tables
 
-1. Download/clone this repository and place the **nine files from `data/`** in a folder readable by the SQL Server service, for example `C:\itel_pakistan_data\`.
-2. Open [`sql/01_create_and_load_stage_tables.sql`](sql/01_create_and_load_stage_tables.sql) in SSMS.
+1. Download/clone this repository and place the **nine files from ``** in a folder readable by the SQL Server service, for example `C:\itel_pakistan_data\`.
+2. Open [`01_create_and_load_stage_tables.sql`](01_create_and_load_stage_tables.sql) in SSMS.
 3. Replace **all nine** example `BULK INSERT` paths with the path used on your SQL Server machine.
 4. Run the script **once in a fresh environment**. It creates a separate reproduction database called `itel_Pakistan_Portfolio_Repro` containing `_Stage` tables. **Do not rerun it in an already-populated database** without adapting it; it does not perform a migration/upsert. The creator's working database was `itel_Pakistan_Analytics`.
-5. Run [`sql/02_validate_stage_tables.sql`](sql/02_validate_stage_tables.sql) and confirm the expected sales, return, inventory, and target totals.
+5. Run [`02_validate_stage_tables.sql`](02_validate_stage_tables.sql) and confirm the expected sales, return, inventory, and target totals.
 
 > If SQL Server cannot read local CSVs via `BULK INSERT`, use **Import Flat File** (or your organization's permitted ETL method), keep IDs typed as **Text** and dates as **Date**, then recreate the same `_Stage` table names/keys before connecting Power BI.
 
@@ -220,46 +217,54 @@ Net Revenue After Returns PKR = [Net Sales PKR] - [Total Refund PKR]
 2. Import the **nine `_Stage` tables**. Do not mix duplicate base/non-stage tables into the final model.
 3. Verify ID columns are **Text**, dates are **Date**, quantity columns are **Whole number**, and prices, discounts and refunds are **Decimal / Fixed decimal** as appropriate.
 4. Mark `DimDate_Stage` as the **Date table**, choosing `[Date]` (not `[MonthStart]`). Disable automatic date tables if necessary.
-5. Create all **16** active, dimension-to-fact `1:*`, **Single** cross-filter relationships using [`powerbi/relationships_16_active_single.csv`](powerbi/relationships_16_active_single.csv).
-6. Add the [`powerbi/dax_measures.dax`](powerbi/dax_measures.dax) expressions **as individual measures**; apply currency and percentage formats.
+5. Create all **16** active, dimension-to-fact `1:*`, **Single** cross-filter relationships using [`relationships_16_active_single.csv`](relationships_16_active_single.csv).
+6. Add the [`dax_measures.dax`](dax_measures.dax) expressions **as individual measures**; apply currency and percentage formats.
 7. Rebuild the five report pages following the visual gallery, or open the `.pbix` separately if available. A finished `.pbix` is **not included** here.
-8. Optional: **View → Themes → Browse for themes** and select [`powerbi/itel_powerbi_theme.json`](powerbi/itel_powerbi_theme.json).
+8. Optional: **View → Themes → Browse for themes** and select [`itel_powerbi_theme.json`](itel_powerbi_theme.json).
 
 ### C. Confirm output
 
-With no page/report filters applied, check that sales transactions equal **12,000**, net sales equal **PKR 2,018,196,409.50**, returned units equal **826**, and the latest inventory stock is **31,886**. Verify the 21-month chronology and model relationships, then check that slicers work across visuals.
+With no page/report filters applied, check that sales transactions equal **12,000**, net sales equal **PKR 2,018,196,409.50**, returned units equal **826**, and the latest inventory stock is **31,886**. Verify the 21-month chronology and model relationships, then check slicer behavior across visuals. Historical closing stock must be computed by **monthly snapshot**, not by adding all months. Revenue targets are keyed to the first day of each month, so compare against sales at the **month and region** level.
 
 ## Repository structure
+
+All files currently sit in the **repository root**; there are no `assets/`, `sql/`, `data/`, `powerbi/`, or `docs/` subfolders. This is the structure verified for `main`:
 
 ```text
 itel-Pakistan-Analytics/
 ├── README.md
-├── assets/
-│   ├── portfolio_showcase.png
-│   ├── 01_executive_overview.png
-│   ├── 02_sales_performance.png
-│   ├── 03_product_regional_analysis.png
-│   ├── 04_returns_analysis.png
-│   └── 05_inventory_analysis.png
-├── data/                              # 9 synthetic CSV files
-│   ├── DimDate.csv
-│   ├── ...
-│   └── FactTargets.csv
-├── sql/
-│   ├── 01_create_and_load_stage_tables.sql
-│   └── 02_validate_stage_tables.sql
-├── powerbi/
-│   ├── dax_measures.dax
-│   ├── relationships_16_active_single.csv
-│   └── itel_powerbi_theme.json
-└── docs/
-    └── model_mermaid.mmd
+├── .gitignore
+├── portfolio_showcase.png
+├── 01_executive_overview.png
+├── 02_sales_performance.png
+├── 03_product_regional_analysis.png
+├── 04_returns_analysis.png
+├── 05_inventory_analysis.png
+├── 01_create_and_load_stage_tables.sql
+├── 02_validate_stage_tables.sql
+├── dax_measures.dax
+├── relationships_16_active_single.csv
+├── model_mermaid.mmd
+├── itel_powerbi_theme.json
+├── DimDate.csv
+├── DimDealers.csv
+├── DimProducts.csv
+├── DimRegions.csv
+├── DimWarehouses.csv
+├── FactSales.csv
+├── FactReturns.csv
+├── FactInventory.csv
+└── FactTargets.csv
 ```
+
+**Navigation:** [SQL setup](01_create_and_load_stage_tables.sql) · [SQL checks](02_validate_stage_tables.sql) · [DAX measures](dax_measures.dax) · [16 relationships](relationships_16_active_single.csv) · [Star schema diagram source](model_mermaid.mmd) · [Power BI theme](itel_powerbi_theme.json) · [Synthetic CSVs](./)
+
+> Dashboard PNGs are available directly above in the [gallery](#dashboard-gallery). No `.pbix` file is currently present in the repository; README images alone are not an interactive Power BI report.
 
 ## Limitations & future improvements
 
 - **Branding and data ethics:** This is independently made with fictional commercial data and itel-inspired dashboard colors; it is **not** a real-world business performance report or an official itel design template.
-- **Dashboard images:** Gallery images are presentation mockups, not interactive Power BI evidence. Replace/add authentic Power BI exports and the finished `.pbix` for a full technical portfolio demonstration.
+- **Dashboard images:** The portfolio images are itel-inspired presentation mockups, not proof of an interactive report. The creator also built a five-page Power BI report in Desktop; add authentic Power BI exports and the `.pbix` file to verify the live report's measures and interactions.
 - **Returns:** ReturnDate drives returns trends while OrderDate drives sales; slicing both by a month does not reconstruct a sale-cohort return rate. A cohort model would require an explicit sold-date-based analysis.
 - **Targets:** Synthetic targets are for comparison exercises, not independent forecasts. Evaluate at **month × region** grain.
 - **Inventory:** Snapshot stock is not additive over time; individual replenishment decisions depend on warehouse–product level thresholds and realistic lead times.
@@ -268,3 +273,4 @@ itel-Pakistan-Analytics/
 ---
 
 **Portfolio case study:** Demonstrating practical data ingestion, SQL quality assurance, dimensional modeling, DAX, and multi-page dashboard storytelling using **synthetic** Pakistan smartphone distribution data.
+
