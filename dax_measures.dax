@@ -1,0 +1,147 @@
+// DAX expressions used in the completed itel Pakistan synthetic portfolio project.
+// CREATE EACH MEASURE SEPARATELY: Power BI Desktop > Modeling > New measure.
+// Fact tables use the _Stage suffix. PKR amounts exclude taxes/overhead.
+
+// ====================== SALES ======================
+Total Transactions = COUNTROWS('FactSales_Stage')
+
+Total Units Sold = SUM('FactSales_Stage'[UnitsSold])
+
+Gross Sales PKR =
+SUMX(
+    'FactSales_Stage',
+    ROUND('FactSales_Stage'[UnitsSold] * 'FactSales_Stage'[UnitPricePKR], 2)
+)
+
+Discount Amount PKR =
+SUMX(
+    'FactSales_Stage',
+    ROUND(
+        'FactSales_Stage'[UnitsSold]
+            * 'FactSales_Stage'[UnitPricePKR]
+            * 'FactSales_Stage'[DiscountPct], 2
+    )
+)
+
+Net Sales PKR = [Gross Sales PKR] - [Discount Amount PKR]
+
+Average Order Value PKR = DIVIDE([Net Sales PKR], [Total Transactions], 0)
+
+Discount Rate % = DIVIDE([Discount Amount PKR], [Gross Sales PKR], 0)
+
+Total Products Sold = DISTINCTCOUNT('FactSales_Stage'[ProductID])
+
+Regions With Sales = DISTINCTCOUNT('FactSales_Stage'[RegionID])
+
+// ====================== RETURNS ====================
+Total Returns = COUNTROWS('FactReturns_Stage')
+
+Total Returned Units = SUM('FactReturns_Stage'[ReturnQty])
+
+Total Refund PKR = SUM('FactReturns_Stage'[RefundAmountPKR])
+
+Return Rate % = DIVIDE([Total Returned Units], [Total Units Sold], 0)
+
+Net Revenue After Returns PKR = [Net Sales PKR] - [Total Refund PKR]
+
+// ====================== TARGETS ====================
+Revenue Target PKR = SUM('FactTargets_Stage'[RevenueTargetPKR])
+
+Target Achievement % = DIVIDE([Net Sales PKR], [Revenue Target PKR], 0)
+
+Target Variance PKR = [Net Sales PKR] - [Revenue Target PKR]
+
+// ====================== INVENTORY ==================
+// Date slicers intentionally do not move these latest-snapshot KPI values.
+Latest Inventory Date =
+CALCULATE(
+    MAX('FactInventory_Stage'[SnapshotDate]),
+    REMOVEFILTERS('DimDate_Stage')
+)
+
+Closing Stock Units =
+VAR LatestDate = [Latest Inventory Date]
+RETURN CALCULATE(
+    SUM('FactInventory_Stage'[ClosingStockUnits]),
+    REMOVEFILTERS('DimDate_Stage'),
+    'FactInventory_Stage'[SnapshotDate] = LatestDate
+)
+
+Reorder Point Units =
+VAR LatestDate = [Latest Inventory Date]
+RETURN CALCULATE(
+    SUM('FactInventory_Stage'[ReorderPointUnits]),
+    REMOVEFILTERS('DimDate_Stage'),
+    'FactInventory_Stage'[SnapshotDate] = LatestDate
+)
+
+Low Stock Products =
+VAR LatestDate = [Latest Inventory Date]
+VAR CurrentInventory =
+    CALCULATETABLE(
+        'FactInventory_Stage',
+        REMOVEFILTERS('DimDate_Stage'),
+        'FactInventory_Stage'[SnapshotDate] = LatestDate
+    )
+VAR LowStockRows =
+    FILTER(
+        CurrentInventory,
+        'FactInventory_Stage'[ClosingStockUnits]
+            <= 'FactInventory_Stage'[ReorderPointUnits]
+    )
+RETURN COALESCE(
+    COUNTROWS(SUMMARIZE(LowStockRows, 'FactInventory_Stage'[ProductID])),
+    0
+)
+
+// "Locations" here means warehouse-product combinations, not distinct warehouses.
+Low Stock Locations =
+VAR LatestDate = [Latest Inventory Date]
+VAR LowStockRows =
+    FILTER(
+        CALCULATETABLE(
+            'FactInventory_Stage',
+            REMOVEFILTERS('DimDate_Stage'),
+            'FactInventory_Stage'[SnapshotDate] = LatestDate
+        ),
+        'FactInventory_Stage'[ClosingStockUnits]
+            <= 'FactInventory_Stage'[ReorderPointUnits]
+    )
+RETURN COALESCE(
+    COUNTROWS(
+        SUMMARIZE(
+            LowStockRows,
+            'FactInventory_Stage'[WarehouseID],
+            'FactInventory_Stage'[ProductID]
+        )
+    ), 0
+)
+
+Low Stock Shortage Units =
+VAR LatestDate = [Latest Inventory Date]
+VAR LowStockRows =
+    CALCULATETABLE(
+        FILTER(
+            'FactInventory_Stage',
+            'FactInventory_Stage'[ClosingStockUnits]
+                < 'FactInventory_Stage'[ReorderPointUnits]
+        ),
+        REMOVEFILTERS('DimDate_Stage'),
+        'FactInventory_Stage'[SnapshotDate] = LatestDate
+    )
+RETURN SUMX(
+    LowStockRows,
+    'FactInventory_Stage'[ReorderPointUnits]
+        - 'FactInventory_Stage'[ClosingStockUnits]
+)
+
+// For historical monthly trend only: retains current month/date filter context.
+Monthly Closing Stock Units =
+VAR LastSnapshotInMonth = MAX('FactInventory_Stage'[SnapshotDate])
+RETURN IF(
+    NOT ISBLANK(LastSnapshotInMonth),
+    CALCULATE(
+        SUM('FactInventory_Stage'[ClosingStockUnits]),
+        KEEPFILTERS('FactInventory_Stage'[SnapshotDate] = LastSnapshotInMonth)
+    )
+)

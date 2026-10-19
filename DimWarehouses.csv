@@ -1,0 +1,8 @@
+WarehouseID,RegionID,WarehouseName,RegionLabel
+W01,R01,SIMULATED Punjab Distribution Hub,Punjab
+W02,R02,SIMULATED Sindh Distribution Hub,Sindh
+W03,R03,SIMULATED Khyber Pakhtunkhwa Distribution Hub,Khyber Pakhtunkhwa
+W04,R04,SIMULATED Balochistan Distribution Hub,Balochistan
+W05,R05,SIMULATED Islamabad Capital Territory Distribution Hub,Islamabad Capital Territory
+W06,R06,SIMULATED Azad Jammu and Kashmir Distribution Hub,Azad Jammu and Kashmir
+W07,R07,SIMULATED Gilgit-Baltistan Distribution Hub,Gilgit-Baltistan

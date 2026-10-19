@@ -1,0 +1,8 @@
+RegionID,RegionName,AdminType,Country
+R01,Punjab,Province,Pakistan
+R02,Sindh,Province,Pakistan
+R03,Khyber Pakhtunkhwa,Province,Pakistan
+R04,Balochistan,Province,Pakistan
+R05,Islamabad Capital Territory,Federal Territory,Pakistan
+R06,Azad Jammu and Kashmir,Administrative Region,Pakistan
+R07,Gilgit-Baltistan,Administrative Region,Pakistan

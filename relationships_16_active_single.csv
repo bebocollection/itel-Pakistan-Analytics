@@ -1,0 +1,17 @@
+DimensionTable,DimensionKey,FactTable,FactKey,Cardinality,CrossFilterDirection,Active
+DimDate_Stage,Date,FactSales_Stage,OrderDate,1 to many,Single (Dimension -> Fact),Yes
+DimDate_Stage,Date,FactReturns_Stage,ReturnDate,1 to many,Single (Dimension -> Fact),Yes
+DimDate_Stage,Date,FactInventory_Stage,SnapshotDate,1 to many,Single (Dimension -> Fact),Yes
+DimDate_Stage,Date,FactTargets_Stage,MonthStart,1 to many,Single (Dimension -> Fact),Yes
+DimRegions_Stage,RegionID,FactSales_Stage,RegionID,1 to many,Single (Dimension -> Fact),Yes
+DimRegions_Stage,RegionID,FactReturns_Stage,RegionID,1 to many,Single (Dimension -> Fact),Yes
+DimRegions_Stage,RegionID,FactInventory_Stage,RegionID,1 to many,Single (Dimension -> Fact),Yes
+DimRegions_Stage,RegionID,FactTargets_Stage,RegionID,1 to many,Single (Dimension -> Fact),Yes
+DimProducts_Stage,ProductID,FactSales_Stage,ProductID,1 to many,Single (Dimension -> Fact),Yes
+DimProducts_Stage,ProductID,FactReturns_Stage,ProductID,1 to many,Single (Dimension -> Fact),Yes
+DimProducts_Stage,ProductID,FactInventory_Stage,ProductID,1 to many,Single (Dimension -> Fact),Yes
+DimDealers_Stage,DealerID,FactSales_Stage,DealerID,1 to many,Single (Dimension -> Fact),Yes
+DimDealers_Stage,DealerID,FactReturns_Stage,DealerID,1 to many,Single (Dimension -> Fact),Yes
+DimWarehouses_Stage,WarehouseID,FactSales_Stage,WarehouseID,1 to many,Single (Dimension -> Fact),Yes
+DimWarehouses_Stage,WarehouseID,FactReturns_Stage,WarehouseID,1 to many,Single (Dimension -> Fact),Yes
+DimWarehouses_Stage,WarehouseID,FactInventory_Stage,WarehouseID,1 to many,Single (Dimension -> Fact),Yes

@@ -1,0 +1,26 @@
+flowchart LR
+  DD["DimDate_Stage"]
+  DR["DimRegions_Stage"]
+  DP["DimProducts_Stage"]
+  DL["DimDealers_Stage"]
+  DW["DimWarehouses_Stage"]
+  FS[("FactSales_Stage")]
+  FR[("FactReturns_Stage")]
+  FI[("FactInventory_Stage")]
+  FT[("FactTargets_Stage")]
+  DD --> FS
+  DD --> FR
+  DD --> FI
+  DD --> FT
+  DR --> FS
+  DR --> FR
+  DR --> FI
+  DR --> FT
+  DP --> FS
+  DP --> FR
+  DP --> FI
+  DL --> FS
+  DL --> FR
+  DW --> FS
+  DW --> FR
+  DW --> FI

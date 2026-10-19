@@ -1,0 +1,22 @@
+{
+  "name": "itel Pakistan - Magenta Executive",
+  "dataColors": [
+    "#E8005B",
+    "#67375D",
+    "#E98BAD",
+    "#F4AB78",
+    "#9E456F",
+    "#5A485B",
+    "#C9A9BF",
+    "#6B8E87"
+  ],
+  "background": "#F8F7FA",
+  "foreground": "#231627",
+  "tableAccent": "#E8005B",
+  "good": "#098B70",
+  "neutral": "#F4AB78",
+  "bad": "#D53A53",
+  "maximum": "#E8005B",
+  "center": "#F5B6C9",
+  "minimum": "#FFF1F6"
+}

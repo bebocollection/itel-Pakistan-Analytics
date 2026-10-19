@@ -1,0 +1,9 @@
+# Local configuration and credentials
+.env
+.env.*
+*.bak
+*.tmp
+*.pbix~
+~$*
+Thumbs.db
+.DS_Store
