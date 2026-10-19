@@ -41,31 +41,34 @@ The simulated business needs a single reporting layer to answer five management 
 
 ### 01 — Executive Overview
 
-![Executive Overview dashboard](assets/01_executive_overview.png)
+<img width="3112" height="1750" alt="Executive Overview dashboard" src="https://github.com/user-attachments/assets/bbfbe39b-8aca-434a-93f8-77bbab8a2084" />
+
 
 **Purpose:** Business-level KPIs with monthly sales trend, top sales regions/models, and a comparison of actual net sales with synthetic targets. Featured indicators include **12,000** sales lines, **75,825** units, **PKR 2.018B** net sales (after discount), **1.09%** unit return rate, and **PKR 1.996B** revenue after refunds.
 
 ### 02 — Sales Performance
 
-![Sales Performance dashboard](assets/02_sales_performance.png)
+<img width="1672" height="941" alt="Sales Performance dashboard" src="https://github.com/user-attachments/assets/9f707937-3669-456b-ad1f-4ab20527a9c1" />
+
 
 **Purpose:** Analyze monthly **gross vs. net sales**, the combined **revenue and units trend**, revenue by product series, and the top 10 dealers. Includes average order value and effective discount-rate KPIs.
 
 ### 03 — Product & Regional Analysis
 
-![Product and Regional Analysis dashboard](assets/03_product_regional_analysis.png)
+<img width="1672" height="941" alt="Product and Regional Analysis dashboard" src="https://github.com/user-attachments/assets/f31d61a9-3b48-4760-a031-0f56cda49496" />
 
 **Purpose:** Compare **all seven geographic regions**, top 10 models ranked by revenue, the revenue-share donut for product series, and the series mix within each region.
 
 ### 04 — Returns Analysis
 
-![Returns Analysis dashboard](assets/04_returns_analysis.png)
+<img width="1672" height="941" alt="Returns Analysis dashboard" src="https://github.com/user-attachments/assets/2505ca4f-3509-4bc0-9ec4-8224cc5c1043" />
+
 
 **Purpose:** Investigate returned-unit trends, returns by region, reasons for returns, and models with the most returned units. The product ranking includes a tie at the cutoff; **11 models may appear in a Top 10 filter** when ranks tie.
 
 ### 05 — Inventory Analysis
 
-![Inventory Analysis dashboard](assets/05_inventory_analysis.png)
+<img width="1448" height="1086" alt="Inventory Analysis dashboard" src="https://github.com/user-attachments/assets/b16b8d06-1009-4f27-ae25-f5d3c3ff9d68" />
 
 **Purpose:** Monitor latest month-end stock by warehouse and series, identify individual low-stock models and unit shortages, and track **historical month-end closing stock** without adding stock from multiple months.
 
