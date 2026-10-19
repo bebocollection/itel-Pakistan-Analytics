@@ -274,3 +274,4 @@ itel-Pakistan-Analytics/
 
 **Portfolio case study:** Demonstrating practical data ingestion, SQL quality assurance, dimensional modeling, DAX, and multi-page dashboard storytelling using **synthetic** Pakistan smartphone distribution data.
 
+
