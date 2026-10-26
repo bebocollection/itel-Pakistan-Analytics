@@ -1,5 +1,7 @@
 # itel Pakistan | Sales & Operations Analytics
 
+![Uploading itel Pakistan_ Neon Power BI Analytics Showcase.png…]()
+
 **An end-to-end SQL Server and Power BI portfolio case study using synthetic smartphone distribution data.**
 
 **Stack:** Excel-compatible CSV data · Microsoft SQL Server · SQL Server Management Studio (SSMS) · Power BI Desktop · Power Query · DAX  
